@@ -1,0 +1,847 @@
+<!DOCTYPE html>
+<html dir="rtl" lang="he">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>הוויזה שלי 🇬🇧</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Heebo:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; }
+    body { margin: 0; padding: 0; }
+
+    :root {
+      --bg: #F4EFE6;
+      --bg-deep: #ECE5D6;
+      --surface: #FFFFFF;
+      --ink: #1B2845;
+      --ink-2: #243056;
+      --ink-soft: #5E6987;
+      --ink-faint: #9BA3B8;
+      --cream: #F4EFE6;
+      --cream-soft: rgba(244, 239, 230, 0.75);
+      --accent: #B5523B;
+      --accent-soft: #F2DDD4;
+      --accent-deep: #8C3B27;
+      --accent-glow: #E08868;
+      --line: #E2D8C7;
+      --line-strong: #CBC0AE;
+      --good: #4A7C59;
+    }
+
+    body {
+      font-family: 'Heebo', system-ui, -apple-system, sans-serif;
+      background: var(--bg);
+      color: var(--ink);
+      min-height: 100vh;
+      font-feature-settings: "kern", "liga", "tnum";
+      -webkit-font-smoothing: antialiased;
+      background-image:
+        radial-gradient(circle at 10% 0%, rgba(181, 82, 59, 0.06) 0%, transparent 40%),
+        radial-gradient(circle at 90% 100%, rgba(27, 40, 69, 0.05) 0%, transparent 40%);
+    }
+
+    .app {
+      max-width: 480px;
+      margin: 0 auto;
+      padding: 28px 20px 100px;
+    }
+
+    /* Header */
+    .header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 22px;
+    }
+
+    .header-title {
+      font-size: 22px;
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      margin: 0;
+    }
+
+    .header-title .flag {
+      display: inline-block;
+      margin-inline-start: 4px;
+      font-size: 18px;
+    }
+
+    .year-pill {
+      background: var(--surface);
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      padding: 7px 14px;
+      font-size: 12px;
+      color: var(--ink-soft);
+      cursor: pointer;
+      transition: all 0.2s;
+      font-family: inherit;
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      font-weight: 500;
+    }
+
+    .year-pill:hover {
+      background: var(--accent-soft);
+      border-color: var(--accent);
+      color: var(--accent-deep);
+    }
+
+    .year-pill svg { opacity: 0.6; }
+
+    /* Hero (dark) */
+    .hero {
+      background: var(--ink);
+      background-image:
+        radial-gradient(circle at 85% 15%, rgba(181, 82, 59, 0.35) 0%, transparent 55%),
+        radial-gradient(circle at 15% 90%, rgba(224, 136, 104, 0.18) 0%, transparent 50%);
+      border-radius: 24px;
+      padding: 30px 24px 28px;
+      text-align: center;
+      margin-bottom: 14px;
+      position: relative;
+      overflow: hidden;
+      color: var(--cream);
+      box-shadow: 0 8px 24px -8px rgba(27, 40, 69, 0.25);
+    }
+
+    .hero-label {
+      font-size: 11px;
+      color: var(--cream-soft);
+      letter-spacing: 0.16em;
+      margin-bottom: 4px;
+      text-transform: uppercase;
+      font-weight: 500;
+    }
+
+    .hero-number {
+      font-size: 84px;
+      line-height: 1;
+      font-weight: 800;
+      letter-spacing: -0.05em;
+      color: var(--cream);
+      margin: 0;
+      font-variant-numeric: tabular-nums;
+    }
+
+    .progress {
+      margin-top: 22px;
+      height: 6px;
+      background: rgba(244, 239, 230, 0.15);
+      border-radius: 999px;
+      overflow: hidden;
+      position: relative;
+    }
+
+    .progress-fill {
+      height: 100%;
+      background: var(--accent-glow);
+      border-radius: 999px;
+      transition: width 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .progress-fill.danger { background: var(--accent); }
+    .progress-fill.complete { background: var(--good); }
+
+    /* Stats row */
+    .stats {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+      margin-bottom: 28px;
+    }
+
+    .stat {
+      background: var(--surface);
+      border: 1px solid var(--line);
+      border-radius: 16px;
+      padding: 16px;
+      text-align: center;
+    }
+
+    .stat-value {
+      font-size: 28px;
+      font-weight: 700;
+      line-height: 1.1;
+      letter-spacing: -0.02em;
+      color: var(--ink);
+      font-variant-numeric: tabular-nums;
+    }
+
+    .stat-label {
+      font-size: 12px;
+      color: var(--ink-soft);
+      margin-top: 4px;
+    }
+
+    .stat-warning { color: var(--accent); }
+
+    .warning-banner {
+      background: var(--accent-soft);
+      border: 1px solid rgba(181, 82, 59, 0.2);
+      color: var(--accent-deep);
+      padding: 12px 16px;
+      border-radius: 12px;
+      font-size: 13px;
+      margin-bottom: 20px;
+      line-height: 1.5;
+      display: flex;
+      gap: 10px;
+      align-items: flex-start;
+    }
+
+    /* Section heading */
+    .section-head {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 14px;
+    }
+
+    .section-title {
+      font-size: 18px;
+      font-weight: 700;
+      margin: 0;
+      letter-spacing: -0.01em;
+    }
+
+    .add-btn {
+      background: var(--ink);
+      color: white;
+      border: none;
+      border-radius: 999px;
+      padding: 10px 16px;
+      font-size: 13px;
+      font-weight: 500;
+      cursor: pointer;
+      font-family: inherit;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      transition: all 0.2s;
+    }
+
+    .add-btn:hover {
+      background: var(--accent);
+      transform: translateY(-1px);
+    }
+
+    .add-btn svg { width: 14px; height: 14px; }
+
+    /* Flight cards */
+    .flights {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .flight {
+      background: var(--surface);
+      border: 1px solid var(--line);
+      border-radius: 14px;
+      padding: 14px 16px;
+      transition: all 0.2s;
+      cursor: pointer;
+      text-align: start;
+    }
+
+    .flight:hover {
+      border-color: var(--ink-soft);
+      transform: translateY(-1px);
+    }
+
+    .flight-line {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 14.5px;
+      color: var(--ink);
+      flex-wrap: wrap;
+    }
+
+    .flight-dates {
+      font-weight: 600;
+    }
+
+    .flight-sep {
+      color: var(--ink-faint);
+      font-weight: 300;
+    }
+
+    .flight-days {
+      color: var(--ink-soft);
+      font-weight: 500;
+      font-variant-numeric: tabular-nums;
+    }
+
+    .flight-cumulative {
+      margin-inline-start: auto;
+      background: var(--bg-deep);
+      color: var(--ink);
+      padding: 4px 11px;
+      border-radius: 999px;
+      font-size: 12px;
+      font-weight: 600;
+      font-variant-numeric: tabular-nums;
+      white-space: nowrap;
+    }
+
+    .flight-label {
+      font-size: 12.5px;
+      color: var(--ink-faint);
+      margin-top: 5px;
+      font-style: italic;
+    }
+
+    .empty {
+      text-align: center;
+      padding: 44px 20px;
+      color: var(--ink-soft);
+      background: var(--surface);
+      border: 1px dashed var(--line-strong);
+      border-radius: 16px;
+    }
+
+    .empty-icon { font-size: 38px; margin-bottom: 10px; opacity: 0.7; }
+    .empty-main { font-weight: 500; color: var(--ink); margin-bottom: 4px; }
+    .empty-sub { font-size: 13px; }
+
+    /* Modal */
+    .modal-backdrop {
+      position: fixed;
+      inset: 0;
+      background: rgba(27, 40, 69, 0.45);
+      backdrop-filter: blur(4px);
+      -webkit-backdrop-filter: blur(4px);
+      display: none;
+      align-items: flex-end;
+      justify-content: center;
+      z-index: 100;
+      animation: fadeIn 0.2s;
+    }
+
+    .modal-backdrop.active { display: flex; }
+
+    @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+    @keyframes slideUp {
+      from { transform: translateY(24px); opacity: 0; }
+      to { transform: translateY(0); opacity: 1; }
+    }
+
+    .modal {
+      background: var(--bg);
+      width: 100%;
+      max-width: 480px;
+      border-radius: 24px 24px 0 0;
+      padding: 24px;
+      animation: slideUp 0.28s cubic-bezier(0.16, 1, 0.3, 1);
+      max-height: 90vh;
+      overflow-y: auto;
+    }
+
+    @media (min-width: 600px) {
+      .modal-backdrop { align-items: center; padding: 20px; }
+      .modal { border-radius: 24px; }
+    }
+
+    .modal-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 22px;
+    }
+
+    .modal-title {
+      font-size: 20px;
+      font-weight: 700;
+      margin: 0;
+      letter-spacing: -0.01em;
+    }
+
+    .icon-btn {
+      background: transparent;
+      border: none;
+      cursor: pointer;
+      padding: 8px;
+      border-radius: 10px;
+      color: var(--ink-soft);
+      transition: all 0.2s;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .icon-btn:hover { background: var(--bg-deep); color: var(--ink); }
+
+    .field { margin-bottom: 14px; }
+
+    .field-label {
+      display: block;
+      font-size: 12px;
+      color: var(--ink-soft);
+      margin-bottom: 6px;
+      letter-spacing: 0.02em;
+      font-weight: 500;
+    }
+
+    .field-input {
+      width: 100%;
+      background: var(--surface);
+      border: 1px solid var(--line);
+      border-radius: 12px;
+      padding: 13px 14px;
+      font-size: 15px;
+      font-family: inherit;
+      color: var(--ink);
+      transition: all 0.2s;
+    }
+
+    .field-input:focus {
+      outline: none;
+      border-color: var(--accent);
+      box-shadow: 0 0 0 3px var(--accent-soft);
+    }
+
+    .days-preview {
+      background: var(--bg-deep);
+      color: var(--ink);
+      padding: 14px;
+      border-radius: 12px;
+      font-size: 14px;
+      font-weight: 500;
+      text-align: center;
+      margin: 18px 0;
+    }
+
+    .days-preview .num {
+      font-size: 22px;
+      font-weight: 800;
+      margin-inline-end: 4px;
+      font-variant-numeric: tabular-nums;
+    }
+
+    .days-preview.error {
+      background: var(--accent-soft);
+      color: var(--accent-deep);
+      font-size: 13px;
+    }
+
+    .modal-actions { display: flex; gap: 8px; }
+
+    .btn {
+      flex: 1;
+      padding: 14px;
+      border-radius: 12px;
+      font-size: 15px;
+      font-weight: 500;
+      cursor: pointer;
+      border: none;
+      font-family: inherit;
+      transition: all 0.2s;
+    }
+
+    .btn-primary { background: var(--ink); color: white; }
+    .btn-primary:hover { background: var(--accent); }
+    .btn-secondary {
+      background: transparent;
+      color: var(--ink-soft);
+      border: 1px solid var(--line-strong);
+    }
+    .btn-secondary:hover { background: var(--bg-deep); }
+
+    .delete-row {
+      margin-top: 18px;
+      padding-top: 18px;
+      border-top: 1px solid var(--line);
+      text-align: center;
+    }
+
+    .delete-link {
+      background: none;
+      border: none;
+      color: var(--accent);
+      font-size: 13px;
+      cursor: pointer;
+      font-family: inherit;
+      padding: 6px 10px;
+    }
+
+    .delete-link:hover { text-decoration: underline; }
+
+    .helper-text {
+      font-size: 12px;
+      color: var(--ink-soft);
+      margin-top: 14px;
+      line-height: 1.6;
+    }
+
+    .loading {
+      text-align: center;
+      padding: 60px 20px;
+      color: var(--ink-soft);
+    }
+  </style>
+</head>
+<body>
+  <div class="app" id="app">
+    <div class="loading">טוען...</div>
+  </div>
+
+  <div class="modal-backdrop" id="modal" onclick="closeOnBackdrop(event)">
+    <div class="modal" id="modal-content" onclick="event.stopPropagation()"></div>
+  </div>
+
+  <script>
+    const YEAR_END_KEY = 'visa:yearEnd';
+    const FLIGHTS_KEY = 'visa:flights';
+    const TARGET_DAYS = 185;
+    const DEFAULT_YEAR_END = '2027-05-12';
+
+    let state = {
+      yearEnd: DEFAULT_YEAR_END,
+      flights: [],
+      editingId: null,
+      mode: 'add'
+    };
+
+    async function load() {
+      try {
+        const yer = await window.storage.get(YEAR_END_KEY);
+        if (yer && yer.value) state.yearEnd = yer.value;
+      } catch (e) {}
+      try {
+        const fls = await window.storage.get(FLIGHTS_KEY);
+        if (fls && fls.value) state.flights = JSON.parse(fls.value);
+      } catch (e) {}
+    }
+
+    async function saveFlights() {
+      try { await window.storage.set(FLIGHTS_KEY, JSON.stringify(state.flights)); }
+      catch (e) { console.error('save failed', e); }
+    }
+
+    async function saveYearEnd() {
+      try { await window.storage.set(YEAR_END_KEY, state.yearEnd); }
+      catch (e) { console.error('save year failed', e); }
+    }
+
+    function parseDate(s) {
+      const [y, m, d] = s.split('-').map(Number);
+      return new Date(y, m - 1, d);
+    }
+
+    const shortMonths = ['ינו׳', 'פבר׳', 'מרץ', 'אפר׳', 'מאי', 'יוני', 'יולי', 'אוג׳', 'ספט׳', 'אוק׳', 'נוב׳', 'דצמ׳'];
+    const longMonths = ['ינואר', 'פברואר', 'מרץ', 'אפריל', 'מאי', 'יוני', 'יולי', 'אוגוסט', 'ספטמבר', 'אוקטובר', 'נובמבר', 'דצמבר'];
+
+    function formatDate(s) {
+      const d = parseDate(s);
+      return `${d.getDate()} ב${shortMonths[d.getMonth()]}`;
+    }
+
+    function formatDateRange(a, b) {
+      const da = parseDate(a), db = parseDate(b);
+      if (da.getMonth() === db.getMonth() && da.getFullYear() === db.getFullYear()) {
+        return `${da.getDate()}–${db.getDate()} ב${shortMonths[da.getMonth()]}`;
+      }
+      return `${formatDate(a)} – ${formatDate(b)}`;
+    }
+
+    function formatYearEnd(s) {
+      const d = parseDate(s);
+      return `${d.getDate()} ב${longMonths[d.getMonth()]} ${d.getFullYear()}`;
+    }
+
+    function daysBetween(from, to) {
+      const f = parseDate(from);
+      const t = parseDate(to);
+      return Math.round((t - f) / (1000 * 60 * 60 * 24)) + 1;
+    }
+
+    function daysUntil(s) {
+      const target = parseDate(s);
+      const today = new Date();
+      today.setHours(0, 0, 0, 0);
+      return Math.round((target - today) / (1000 * 60 * 60 * 24));
+    }
+
+    function escapeHtml(s) {
+      return String(s).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+    }
+
+    function render() {
+      const app = document.getElementById('app');
+
+      // Cumulative computed chronologically (oldest → newest)
+      const sortedAsc = [...state.flights].sort((a, b) => a.arrival.localeCompare(b.arrival));
+      let cumulative = 0;
+      const withCum = sortedAsc.map(f => {
+        const days = daysBetween(f.arrival, f.departure);
+        cumulative += days;
+        return { ...f, days, cumulative };
+      });
+      // Display newest first
+      const flights = withCum.slice().reverse();
+
+      const totalDays = cumulative;
+      const remaining = Math.max(0, TARGET_DAYS - totalDays);
+      const daysToEnd = Math.max(0, daysUntil(state.yearEnd));
+      const pct = Math.min(100, (totalDays / TARGET_DAYS) * 100);
+
+      const isComplete = totalDays >= TARGET_DAYS;
+      const isBehind = !isComplete && remaining > daysToEnd;
+
+      let progressClass = '';
+      if (isComplete) progressClass = 'complete';
+      else if (isBehind) progressClass = 'danger';
+
+      app.innerHTML = `
+        <div class="header">
+          <h1 class="header-title">הוויזה שלי<span class="flag">🇬🇧</span></h1>
+          <button class="year-pill" onclick="openSettings()">
+            <span>עד ${formatYearEnd(state.yearEnd)}</span>
+            <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/></svg>
+          </button>
+        </div>
+
+        <div class="hero">
+          <div class="hero-label">${isComplete ? 'יעד הושג' : 'ימים שנותרו לצבור'}</div>
+          <div class="hero-number">${isComplete ? '✓' : remaining}</div>
+          <div class="progress">
+            <div class="progress-fill ${progressClass}" style="width: ${pct}%"></div>
+          </div>
+        </div>
+
+        <div class="stats">
+          <div class="stat">
+            <div class="stat-value">${totalDays}</div>
+            <div class="stat-label">ימים נצברו</div>
+          </div>
+          <div class="stat">
+            <div class="stat-value ${isBehind ? 'stat-warning' : ''}">${daysToEnd}</div>
+            <div class="stat-label">ימים עד סוף השנה</div>
+          </div>
+        </div>
+
+        ${isBehind ? `
+          <div class="warning-banner">
+            <span>⚠️</span>
+            <span>חסרים ${remaining} ימים ויש רק ${daysToEnd} ימים עד סוף השנה. צריך להוסיף ביקורים או להאריך את הקיימים.</span>
+          </div>
+        ` : ''}
+
+        ${isComplete ? `
+          <div class="warning-banner" style="background: rgba(74, 124, 89, 0.12); border-color: rgba(74, 124, 89, 0.25); color: var(--good);">
+            <span>✓</span>
+            <span>הגעת ליעד של ${TARGET_DAYS} ימים. כל ביקור נוסף הוא בונוס.</span>
+          </div>
+        ` : ''}
+
+        <div class="section-head">
+          <h2 class="section-title">הטיסות שלי</h2>
+          <button class="add-btn" onclick="openAdd()">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+            <span>הוספת טיסה</span>
+          </button>
+        </div>
+
+        <div class="flights">
+          ${flights.length === 0 ? `
+            <div class="empty">
+              <div class="empty-icon">✈️</div>
+              <div class="empty-main">עדיין לא הוספת טיסות</div>
+              <div class="empty-sub">לחצי על "הוספת טיסה" כדי להתחיל</div>
+            </div>
+          ` : flights.map(f => `
+            <div class="flight" onclick="openEdit('${f.id}')">
+              <div class="flight-line">
+                <span class="flight-dates">${formatDateRange(f.arrival, f.departure)}</span>
+                <span class="flight-sep">·</span>
+                <span class="flight-days">${f.days} ${f.days === 1 ? 'יום' : 'ימים'}</span>
+                <span class="flight-cumulative">סה״כ ${f.cumulative}</span>
+              </div>
+              ${f.label ? `<div class="flight-label">${escapeHtml(f.label)}</div>` : ''}
+            </div>
+          `).join('')}
+        </div>
+      `;
+    }
+
+    function openAdd() {
+      state.mode = 'add';
+      state.editingId = null;
+      renderFlightModal({ arrival: '', departure: '', label: '' });
+    }
+
+    function openEdit(id) {
+      const f = state.flights.find(x => x.id === id);
+      if (!f) return;
+      state.mode = 'edit';
+      state.editingId = id;
+      renderFlightModal(f);
+    }
+
+    function renderFlightModal(f) {
+      const content = document.getElementById('modal-content');
+      content.innerHTML = `
+        <div class="modal-header">
+          <h3 class="modal-title">${state.mode === 'add' ? 'הוספת טיסה' : 'עריכת טיסה'}</h3>
+          <button class="icon-btn" onclick="closeModal()" aria-label="סגור">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+          </button>
+        </div>
+
+        <div class="field">
+          <label class="field-label">תאריך נחיתה באנגליה</label>
+          <input type="date" class="field-input" id="f-arrival" value="${f.arrival}" oninput="updatePreview()">
+        </div>
+
+        <div class="field">
+          <label class="field-label">תאריך טיסה חזרה</label>
+          <input type="date" class="field-input" id="f-departure" value="${f.departure}" oninput="updatePreview()">
+        </div>
+
+        <div class="field">
+          <label class="field-label">תווית (לא חובה)</label>
+          <input type="text" class="field-input" id="f-label" value="${escapeHtml(f.label || '')}" placeholder="לדוגמה: ביקור הורים, חופשה...">
+        </div>
+
+        <div class="days-preview" id="days-preview">בחרי תאריכים</div>
+
+        <div class="modal-actions">
+          <button class="btn btn-secondary" onclick="closeModal()">ביטול</button>
+          <button class="btn btn-primary" onclick="saveFlight()">${state.mode === 'add' ? 'הוסיפי' : 'שמרי שינויים'}</button>
+        </div>
+
+        ${state.mode === 'edit' ? `
+          <div class="delete-row">
+            <button class="delete-link" onclick="deleteFlight()">מחקי טיסה זו</button>
+          </div>
+        ` : ''}
+
+        <div class="helper-text">
+          הספירה כוללת את יום הנחיתה ואת יום הטיסה חזרה (סטנדרט ויזה).
+        </div>
+      `;
+      document.getElementById('modal').classList.add('active');
+      setTimeout(updatePreview, 0);
+    }
+
+    function updatePreview() {
+      const a = document.getElementById('f-arrival').value;
+      const d = document.getElementById('f-departure').value;
+      const preview = document.getElementById('days-preview');
+      if (a && d) {
+        const days = daysBetween(a, d);
+        if (days > 0) {
+          preview.className = 'days-preview';
+          preview.innerHTML = `<span class="num">${days}</span> ${days === 1 ? 'יום' : 'ימים'}`;
+        } else {
+          preview.className = 'days-preview error';
+          preview.textContent = 'תאריך החזרה חייב להיות אחרי הנחיתה';
+        }
+      } else {
+        preview.className = 'days-preview';
+        preview.textContent = 'בחרי תאריכים';
+      }
+    }
+
+    async function saveFlight() {
+      const arrival = document.getElementById('f-arrival').value;
+      const departure = document.getElementById('f-departure').value;
+      const label = document.getElementById('f-label').value.trim();
+
+      if (!arrival || !departure) { alert('יש לבחור שני תאריכים'); return; }
+      if (daysBetween(arrival, departure) <= 0) {
+        alert('תאריך החזרה חייב להיות אחרי הנחיתה');
+        return;
+      }
+
+      if (state.mode === 'add') {
+        state.flights.push({
+          id: Date.now().toString(36) + Math.random().toString(36).slice(2, 8),
+          arrival, departure, label
+        });
+      } else {
+        const f = state.flights.find(x => x.id === state.editingId);
+        if (f) { f.arrival = arrival; f.departure = departure; f.label = label; }
+      }
+
+      await saveFlights();
+      closeModal();
+      render();
+    }
+
+    async function deleteFlight() {
+      if (!confirm('למחוק את הטיסה הזו?')) return;
+      state.flights = state.flights.filter(x => x.id !== state.editingId);
+      await saveFlights();
+      closeModal();
+      render();
+    }
+
+    function openSettings() {
+      state.mode = 'settings';
+      const content = document.getElementById('modal-content');
+      content.innerHTML = `
+        <div class="modal-header">
+          <h3 class="modal-title">הגדרות</h3>
+          <button class="icon-btn" onclick="closeModal()" aria-label="סגור">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+          </button>
+        </div>
+
+        <div class="field">
+          <label class="field-label">סוף שנת הוויזה הנוכחית</label>
+          <input type="date" class="field-input" id="s-yearend" value="${state.yearEnd}">
+        </div>
+
+        <div class="helper-text" style="margin-bottom: 18px;">
+          כשתחל שנת ויזה חדשה, עדכני את התאריך ואיפסי את הטיסות.
+        </div>
+
+        <div class="modal-actions">
+          <button class="btn btn-secondary" onclick="closeModal()">ביטול</button>
+          <button class="btn btn-primary" onclick="saveSettings()">שמרי</button>
+        </div>
+
+        <div class="delete-row">
+          <button class="delete-link" onclick="resetAll()">איפוס מלא — מחיקת כל הטיסות</button>
+        </div>
+      `;
+      document.getElementById('modal').classList.add('active');
+    }
+
+    async function saveSettings() {
+      const ye = document.getElementById('s-yearend').value;
+      if (ye) { state.yearEnd = ye; await saveYearEnd(); }
+      closeModal();
+      render();
+    }
+
+    async function resetAll() {
+      if (!confirm('למחוק את כל הטיסות? פעולה זו לא ניתנת לביטול.')) return;
+      state.flights = [];
+      await saveFlights();
+      closeModal();
+      render();
+    }
+
+    function closeModal() {
+      document.getElementById('modal').classList.remove('active');
+    }
+
+    function closeOnBackdrop(e) {
+      if (e.target.id === 'modal') closeModal();
+    }
+
+    (async function init() {
+      await load();
+      render();
+    })();
+  </script>
+</body>
+</html>
