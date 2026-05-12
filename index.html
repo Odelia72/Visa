@@ -508,24 +508,24 @@
       mode: 'add'
     };
 
-    async function load() {
+    function load() {
       try {
-        const yer = await window.storage.get(YEAR_END_KEY);
-        if (yer && yer.value) state.yearEnd = yer.value;
+        const yer = localStorage.getItem(YEAR_END_KEY);
+        if (yer) state.yearEnd = yer;
       } catch (e) {}
       try {
-        const fls = await window.storage.get(FLIGHTS_KEY);
-        if (fls && fls.value) state.flights = JSON.parse(fls.value);
+        const fls = localStorage.getItem(FLIGHTS_KEY);
+        if (fls) state.flights = JSON.parse(fls);
       } catch (e) {}
     }
 
-    async function saveFlights() {
-      try { await window.storage.set(FLIGHTS_KEY, JSON.stringify(state.flights)); }
+    function saveFlights() {
+      try { localStorage.setItem(FLIGHTS_KEY, JSON.stringify(state.flights)); }
       catch (e) { console.error('save failed', e); }
     }
 
-    async function saveYearEnd() {
-      try { await window.storage.set(YEAR_END_KEY, state.yearEnd); }
+    function saveYearEnd() {
+      try { localStorage.setItem(YEAR_END_KEY, state.yearEnd); }
       catch (e) { console.error('save year failed', e); }
     }
 
