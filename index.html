@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>הוויזה שלי 🇬🇧</title>
+  <title>הוויזה שלנו 🇬🇧</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Heebo:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
@@ -21,6 +21,7 @@
       --ink-faint: #9BA3B8;
       --cream: #F4EFE6;
       --cream-soft: rgba(244, 239, 230, 0.75);
+      --cream-faint: rgba(244, 239, 230, 0.45);
       --accent: #B5523B;
       --accent-soft: #F2DDD4;
       --accent-deep: #8C3B27;
@@ -53,7 +54,7 @@
       display: flex;
       align-items: center;
       justify-content: space-between;
-      margin-bottom: 22px;
+      margin-bottom: 18px;
     }
 
     .header-title {
@@ -93,7 +94,42 @@
 
     .year-pill svg { opacity: 0.6; }
 
-    /* Hero (dark) */
+    /* Tabs */
+    .tabs {
+      display: flex;
+      background: var(--surface);
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      padding: 4px;
+      margin-bottom: 16px;
+      gap: 2px;
+    }
+
+    .tab {
+      flex: 1;
+      background: transparent;
+      border: none;
+      padding: 9px 14px;
+      font-size: 14px;
+      font-weight: 600;
+      color: var(--ink-soft);
+      cursor: pointer;
+      font-family: inherit;
+      border-radius: 999px;
+      transition: all 0.2s;
+    }
+
+    .tab.active {
+      background: var(--ink);
+      color: white;
+    }
+
+    .tab:not(.active):hover {
+      background: var(--bg-deep);
+      color: var(--ink);
+    }
+
+    /* Hero — single (Meir tab) */
     .hero {
       background: var(--ink);
       background-image:
@@ -147,12 +183,79 @@
     .progress-fill.danger { background: var(--accent); }
     .progress-fill.complete { background: var(--good); }
 
+    /* Hero — split (Odelia tab) */
+    .hero-split {
+      display: flex;
+      align-items: stretch;
+      padding: 24px 16px;
+      gap: 0;
+    }
+
+    .hero-half {
+      flex: 1;
+      text-align: center;
+      padding: 0 8px;
+      min-width: 0;
+    }
+
+    .hero-divider {
+      width: 1px;
+      background: rgba(244, 239, 230, 0.18);
+      margin: 4px 0;
+    }
+
+    .hero-half-name {
+      font-size: 12px;
+      color: var(--cream-soft);
+      font-weight: 600;
+      letter-spacing: 0.04em;
+      margin-bottom: 3px;
+    }
+
+    .hero-half-label {
+      font-size: 10px;
+      color: var(--cream-faint);
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      margin-bottom: 6px;
+    }
+
+    .hero-half-number {
+      font-size: 56px;
+      line-height: 1;
+      font-weight: 800;
+      letter-spacing: -0.04em;
+      color: var(--cream);
+      font-variant-numeric: tabular-nums;
+    }
+
+    .hero-half-progress {
+      margin-top: 14px;
+      height: 4px;
+      background: rgba(244, 239, 230, 0.15);
+      border-radius: 999px;
+      overflow: hidden;
+    }
+
+    .hero-half-progress-fill {
+      height: 100%;
+      background: var(--accent-glow);
+      border-radius: 999px;
+      transition: width 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    .hero-half-progress-fill.danger { background: var(--accent); }
+    .hero-half-progress-fill.complete { background: var(--good); }
+
     /* Stats row */
     .stats {
       display: grid;
       grid-template-columns: 1fr 1fr;
       gap: 10px;
-      margin-bottom: 28px;
+      margin-bottom: 24px;
+    }
+
+    .stats.single {
+      grid-template-columns: 1fr;
     }
 
     .stat {
@@ -263,14 +366,8 @@
       flex-wrap: wrap;
     }
 
-    .flight-dates {
-      font-weight: 600;
-    }
-
-    .flight-sep {
-      color: var(--ink-faint);
-      font-weight: 300;
-    }
+    .flight-dates { font-weight: 600; }
+    .flight-sep { color: var(--ink-faint); font-weight: 300; }
 
     .flight-days {
       color: var(--ink-soft);
@@ -290,10 +387,40 @@
       white-space: nowrap;
     }
 
+    .flight-meta {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      margin-top: 6px;
+      flex-wrap: wrap;
+    }
+
+    .flight-badge {
+      font-size: 11px;
+      padding: 2px 8px;
+      border-radius: 999px;
+      font-weight: 600;
+      letter-spacing: 0.02em;
+    }
+
+    .flight-badge.shared {
+      background: var(--bg-deep);
+      color: var(--ink-soft);
+    }
+
+    .flight-badge.solo {
+      background: var(--accent-soft);
+      color: var(--accent-deep);
+    }
+
+    .flight-badge.split {
+      background: rgba(74, 124, 89, 0.12);
+      color: var(--good);
+    }
+
     .flight-label {
       font-size: 12.5px;
       color: var(--ink-faint);
-      margin-top: 5px;
       font-style: italic;
     }
 
@@ -339,7 +466,7 @@
       border-radius: 24px 24px 0 0;
       padding: 24px;
       animation: slideUp 0.28s cubic-bezier(0.16, 1, 0.3, 1);
-      max-height: 90vh;
+      max-height: 92vh;
       overflow-y: auto;
     }
 
@@ -352,7 +479,7 @@
       display: flex;
       justify-content: space-between;
       align-items: center;
-      margin-bottom: 22px;
+      margin-bottom: 20px;
     }
 
     .modal-title {
@@ -406,6 +533,119 @@
       box-shadow: 0 0 0 3px var(--accent-soft);
     }
 
+    /* Segmented control */
+    .segmented {
+      display: flex;
+      background: var(--surface);
+      border: 1px solid var(--line);
+      border-radius: 12px;
+      padding: 3px;
+      gap: 2px;
+    }
+
+    .seg-option {
+      flex: 1;
+      background: transparent;
+      border: none;
+      padding: 10px 14px;
+      font-size: 14px;
+      font-weight: 600;
+      color: var(--ink-soft);
+      cursor: pointer;
+      font-family: inherit;
+      border-radius: 10px;
+      transition: all 0.2s;
+    }
+
+    .seg-option.active {
+      background: var(--ink);
+      color: white;
+    }
+
+    .seg-option:not(.active):hover {
+      background: var(--bg-deep);
+      color: var(--ink);
+    }
+
+    /* Toggle */
+    .toggle-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 12px 14px;
+      background: var(--surface);
+      border: 1px solid var(--line);
+      border-radius: 12px;
+      margin-bottom: 14px;
+      cursor: pointer;
+    }
+
+    .toggle-label {
+      font-size: 14px;
+      color: var(--ink);
+      font-weight: 500;
+    }
+
+    .toggle-switch {
+      width: 38px;
+      height: 22px;
+      background: var(--line-strong);
+      border-radius: 999px;
+      position: relative;
+      transition: background 0.2s;
+      flex-shrink: 0;
+    }
+
+    .toggle-switch::after {
+      content: '';
+      position: absolute;
+      top: 2px;
+      right: 2px;
+      width: 18px;
+      height: 18px;
+      background: white;
+      border-radius: 50%;
+      transition: transform 0.2s;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.15);
+    }
+
+    .toggle-switch.on {
+      background: var(--ink);
+    }
+
+    .toggle-switch.on::after {
+      transform: translateX(-16px);
+    }
+
+    .split-dates-group {
+      background: var(--surface);
+      border: 1px solid var(--line);
+      border-radius: 12px;
+      padding: 14px;
+      margin-bottom: 14px;
+    }
+
+    .split-dates-group h4 {
+      margin: 0 0 10px 0;
+      font-size: 13px;
+      font-weight: 700;
+      color: var(--ink);
+    }
+
+    .split-dates-group + .split-dates-group {
+      margin-top: -4px;
+    }
+
+    .date-pair {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 8px;
+    }
+
+    .date-pair .field {
+      margin-bottom: 0;
+    }
+
     .days-preview {
       background: var(--bg-deep);
       color: var(--ink);
@@ -414,7 +654,7 @@
       font-size: 14px;
       font-weight: 500;
       text-align: center;
-      margin: 18px 0;
+      margin: 14px 0 18px;
     }
 
     .days-preview .num {
@@ -422,6 +662,24 @@
       font-weight: 800;
       margin-inline-end: 4px;
       font-variant-numeric: tabular-nums;
+    }
+
+    .days-preview.split {
+      display: flex;
+      justify-content: space-around;
+      gap: 8px;
+    }
+
+    .days-preview.split .side {
+      flex: 1;
+    }
+
+    .days-preview.split .side-label {
+      font-size: 11px;
+      color: var(--ink-soft);
+      font-weight: 600;
+      margin-bottom: 2px;
+      letter-spacing: 0.04em;
     }
 
     .days-preview.error {
@@ -446,6 +704,11 @@
 
     .btn-primary { background: var(--ink); color: white; }
     .btn-primary:hover { background: var(--accent); }
+    .btn-primary:disabled {
+      background: var(--line-strong);
+      cursor: not-allowed;
+      opacity: 0.7;
+    }
     .btn-secondary {
       background: transparent;
       color: var(--ink-soft);
@@ -498,16 +761,26 @@
   <script>
     const YEAR_END_KEY = 'visa:yearEnd';
     const FLIGHTS_KEY = 'visa:flights';
+    const ACTIVE_TAB_KEY = 'visa:activeTab';
     const TARGET_DAYS = 180;
     const DEFAULT_YEAR_END = '2027-05-12';
+
+    const PEOPLE = {
+      odelia: { name: 'אודליה' },
+      meir: { name: 'מאיר' }
+    };
 
     let state = {
       yearEnd: DEFAULT_YEAR_END,
       flights: [],
+      activeTab: 'odelia',
       editingId: null,
-      mode: 'add'
+      mode: 'add',
+      // Modal draft state:
+      draft: null
     };
 
+    // ──── Storage ────
     function load() {
       try {
         const yer = localStorage.getItem(YEAR_END_KEY);
@@ -515,7 +788,19 @@
       } catch (e) {}
       try {
         const fls = localStorage.getItem(FLIGHTS_KEY);
-        if (fls) state.flights = JSON.parse(fls);
+        if (fls) {
+          state.flights = JSON.parse(fls);
+          // Migrate old flights (no `type` field) → treat as shared
+          state.flights = state.flights.map(f => ({
+            ...f,
+            type: f.type || 'shared',
+            splitDates: f.splitDates || false
+          }));
+        }
+      } catch (e) {}
+      try {
+        const tab = localStorage.getItem(ACTIVE_TAB_KEY);
+        if (tab === 'odelia' || tab === 'meir') state.activeTab = tab;
       } catch (e) {}
     }
 
@@ -526,16 +811,22 @@
 
     function saveYearEnd() {
       try { localStorage.setItem(YEAR_END_KEY, state.yearEnd); }
-      catch (e) { console.error('save year failed', e); }
+      catch (e) {}
     }
 
+    function saveActiveTab() {
+      try { localStorage.setItem(ACTIVE_TAB_KEY, state.activeTab); }
+      catch (e) {}
+    }
+
+    // ──── Date helpers ────
     function parseDate(s) {
       const [y, m, d] = s.split('-').map(Number);
       return new Date(y, m - 1, d);
     }
 
-    const shortMonths = ['ינו׳', 'פבר׳', 'מרץ', 'אפר׳', 'מאי', 'יוני', 'יולי', 'אוג׳', 'ספט׳', 'אוק׳', 'נוב׳', 'דצמ׳'];
-    const longMonths = ['ינואר', 'פברואר', 'מרץ', 'אפריל', 'מאי', 'יוני', 'יולי', 'אוגוסט', 'ספטמבר', 'אוקטובר', 'נובמבר', 'דצמבר'];
+    const shortMonths = ['ינו׳','פבר׳','מרץ','אפר׳','מאי','יוני','יולי','אוג׳','ספט׳','אוק׳','נוב׳','דצמ׳'];
+    const longMonths  = ['ינואר','פברואר','מרץ','אפריל','מאי','יוני','יולי','אוגוסט','ספטמבר','אוקטובר','נובמבר','דצמבר'];
 
     function formatDate(s) {
       const d = parseDate(s);
@@ -556,6 +847,7 @@
     }
 
     function daysBetween(from, to) {
+      if (!from || !to) return 0;
       const f = parseDate(from);
       const t = parseDate(to);
       return Math.round((t - f) / (1000 * 60 * 60 * 24)) + 1;
@@ -572,76 +864,239 @@
       return String(s).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
     }
 
+    // ──── Flight helpers ────
+    // type: 'shared' | 'odelia' | 'meir'
+    // splitDates only meaningful when type='shared'
+
+    function isOnFlight(flight, person) {
+      return flight.type === 'shared' || flight.type === person;
+    }
+
+    function getFlightDates(flight, person) {
+      if (flight.type === 'shared' && flight.splitDates) {
+        if (person === 'odelia') {
+          return { arrival: flight.odeliaArrival, departure: flight.odeliaDeparture };
+        }
+        return { arrival: flight.meirArrival, departure: flight.meirDeparture };
+      }
+      return { arrival: flight.arrival, departure: flight.departure };
+    }
+
+    function getFlightsForPerson(person) {
+      const list = state.flights.filter(f => isOnFlight(f, person));
+      // Sort chronologically (oldest → newest) by this person's arrival date
+      const sorted = [...list].sort((a, b) => {
+        const ad = getFlightDates(a, person).arrival;
+        const bd = getFlightDates(b, person).arrival;
+        return ad.localeCompare(bd);
+      });
+      let cumulative = 0;
+      return sorted.map(f => {
+        const dates = getFlightDates(f, person);
+        const days = daysBetween(dates.arrival, dates.departure);
+        cumulative += days;
+        return {
+          ...f,
+          displayArrival: dates.arrival,
+          displayDeparture: dates.departure,
+          days,
+          cumulative
+        };
+      });
+    }
+
+    function totalDaysFor(person) {
+      const f = getFlightsForPerson(person);
+      return f.length > 0 ? f[f.length - 1].cumulative : 0;
+    }
+
+    // ──── Render ────
     function render() {
       const app = document.getElementById('app');
-
-      // Cumulative computed chronologically (oldest → newest)
-      const sortedAsc = [...state.flights].sort((a, b) => a.arrival.localeCompare(b.arrival));
-      let cumulative = 0;
-      const withCum = sortedAsc.map(f => {
-        const days = daysBetween(f.arrival, f.departure);
-        cumulative += days;
-        return { ...f, days, cumulative };
-      });
-      // Display newest first
-      const flights = withCum.slice().reverse();
-
-      const totalDays = cumulative;
-      const remaining = Math.max(0, TARGET_DAYS - totalDays);
+      const active = state.activeTab;
       const daysToEnd = Math.max(0, daysUntil(state.yearEnd));
-      const pct = Math.min(100, (totalDays / TARGET_DAYS) * 100);
 
-      const isComplete = totalDays >= TARGET_DAYS;
-      const isBehind = !isComplete && remaining > daysToEnd;
+      const odeliaTotal = totalDaysFor('odelia');
+      const meirTotal = totalDaysFor('meir');
+      const odeliaRemain = Math.max(0, TARGET_DAYS - odeliaTotal);
+      const meirRemain = Math.max(0, TARGET_DAYS - meirTotal);
+      const odeliaPct = Math.min(100, (odeliaTotal / TARGET_DAYS) * 100);
+      const meirPct = Math.min(100, (meirTotal / TARGET_DAYS) * 100);
 
-      let progressClass = '';
-      if (isComplete) progressClass = 'complete';
-      else if (isBehind) progressClass = 'danger';
+      const odeliaComplete = odeliaTotal >= TARGET_DAYS;
+      const meirComplete = meirTotal >= TARGET_DAYS;
+      const odeliaBehind = !odeliaComplete && odeliaRemain > daysToEnd;
+      const meirBehind = !meirComplete && meirRemain > daysToEnd;
+
+      const odeliaCls = odeliaComplete ? 'complete' : (odeliaBehind ? 'danger' : '');
+      const meirCls = meirComplete ? 'complete' : (meirBehind ? 'danger' : '');
+
+      // Build hero
+      let heroHtml = '';
+      if (active === 'odelia') {
+        heroHtml = `
+          <div class="hero hero-split">
+            <div class="hero-half">
+              <div class="hero-half-name">אודליה</div>
+              <div class="hero-half-label">${odeliaComplete ? 'הושלם' : 'נותרו'}</div>
+              <div class="hero-half-number">${odeliaComplete ? '✓' : odeliaRemain}</div>
+              <div class="hero-half-progress">
+                <div class="hero-half-progress-fill ${odeliaCls}" style="width: ${odeliaPct}%"></div>
+              </div>
+            </div>
+            <div class="hero-divider"></div>
+            <div class="hero-half">
+              <div class="hero-half-name">מאיר</div>
+              <div class="hero-half-label">${meirComplete ? 'הושלם' : 'נותרו'}</div>
+              <div class="hero-half-number">${meirComplete ? '✓' : meirRemain}</div>
+              <div class="hero-half-progress">
+                <div class="hero-half-progress-fill ${meirCls}" style="width: ${meirPct}%"></div>
+              </div>
+            </div>
+          </div>
+        `;
+      } else {
+        heroHtml = `
+          <div class="hero">
+            <div class="hero-label">${meirComplete ? 'יעד הושג' : 'ימים שנותרו לצבור'}</div>
+            <div class="hero-number">${meirComplete ? '✓' : meirRemain}</div>
+            <div class="progress">
+              <div class="progress-fill ${meirCls}" style="width: ${meirPct}%"></div>
+            </div>
+          </div>
+        `;
+      }
+
+      // Build stats
+      let statsHtml = '';
+      if (active === 'odelia') {
+        statsHtml = `
+          <div class="stats single">
+            <div class="stat">
+              <div class="stat-value ${(odeliaBehind || meirBehind) ? 'stat-warning' : ''}">${daysToEnd}</div>
+              <div class="stat-label">ימים עד סוף השנה</div>
+            </div>
+          </div>
+        `;
+      } else {
+        statsHtml = `
+          <div class="stats">
+            <div class="stat">
+              <div class="stat-value">${meirTotal}</div>
+              <div class="stat-label">ימים נצברו</div>
+            </div>
+            <div class="stat">
+              <div class="stat-value ${meirBehind ? 'stat-warning' : ''}">${daysToEnd}</div>
+              <div class="stat-label">ימים עד סוף השנה</div>
+            </div>
+          </div>
+        `;
+      }
+
+      // Warning banners
+      let warningHtml = '';
+      if (active === 'odelia') {
+        const behindMsgs = [];
+        if (odeliaBehind) behindMsgs.push(`לאודליה חסרים ${odeliaRemain} ימים`);
+        if (meirBehind) behindMsgs.push(`למאיר חסרים ${meirRemain} ימים`);
+        if (behindMsgs.length > 0) {
+          warningHtml = `
+            <div class="warning-banner">
+              <span>⚠️</span>
+              <span>${behindMsgs.join(' · ')}, ויש רק ${daysToEnd} ימים עד סוף השנה.</span>
+            </div>
+          `;
+        }
+        if (odeliaComplete && meirComplete) {
+          warningHtml = `
+            <div class="warning-banner" style="background: rgba(74, 124, 89, 0.12); border-color: rgba(74, 124, 89, 0.25); color: var(--good);">
+              <span>✓</span>
+              <span>שניכם הגעתם ליעד של ${TARGET_DAYS} ימים. כל ביקור נוסף הוא בונוס.</span>
+            </div>
+          `;
+        }
+      } else {
+        if (meirBehind) {
+          warningHtml = `
+            <div class="warning-banner">
+              <span>⚠️</span>
+              <span>חסרים למאיר ${meirRemain} ימים ויש רק ${daysToEnd} ימים עד סוף השנה.</span>
+            </div>
+          `;
+        }
+        if (meirComplete) {
+          warningHtml = `
+            <div class="warning-banner" style="background: rgba(74, 124, 89, 0.12); border-color: rgba(74, 124, 89, 0.25); color: var(--good);">
+              <span>✓</span>
+              <span>מאיר הגיע ליעד של ${TARGET_DAYS} ימים. כל ביקור נוסף הוא בונוס.</span>
+            </div>
+          `;
+        }
+      }
+
+      // Flights list
+      const personFlights = getFlightsForPerson(active);
+      const flightsReversed = personFlights.slice().reverse();
+
+      const flightsHtml = flightsReversed.length === 0 ? `
+        <div class="empty">
+          <div class="empty-icon">✈️</div>
+          <div class="empty-main">עדיין לא הוספת טיסות</div>
+          <div class="empty-sub">לחצי על "הוספת טיסה" כדי להתחיל</div>
+        </div>
+      ` : flightsReversed.map(f => {
+        let badge = '';
+        if (f.type === 'shared') {
+          if (f.splitDates) {
+            const other = active === 'odelia' ? 'meir' : 'odelia';
+            const otherDates = getFlightDates(f, other);
+            const otherDays = daysBetween(otherDates.arrival, otherDates.departure);
+            badge = `<span class="flight-badge split">משותפת · ${PEOPLE[other].name} ${otherDays} ימים</span>`;
+          } else {
+            badge = `<span class="flight-badge shared">משותפת</span>`;
+          }
+        } else {
+          badge = `<span class="flight-badge solo">${PEOPLE[f.type].name} בלבד</span>`;
+        }
+
+        const labelHtml = f.label ? `<span class="flight-label">· ${escapeHtml(f.label)}</span>` : '';
+
+        return `
+          <div class="flight" onclick="openEdit('${f.id}')">
+            <div class="flight-line">
+              <span class="flight-dates">${formatDateRange(f.displayArrival, f.displayDeparture)}</span>
+              <span class="flight-sep">·</span>
+              <span class="flight-days">${f.days} ${f.days === 1 ? 'יום' : 'ימים'}</span>
+              <span class="flight-cumulative">סה״כ ${f.cumulative}</span>
+            </div>
+            <div class="flight-meta">
+              ${badge}
+              ${labelHtml}
+            </div>
+          </div>
+        `;
+      }).join('');
 
       app.innerHTML = `
         <div class="header">
-          <h1 class="header-title">הוויזה שלי<span class="flag">🇬🇧</span></h1>
+          <h1 class="header-title">הוויזה שלנו<span class="flag">🇬🇧</span></h1>
           <button class="year-pill" onclick="openSettings()">
             <span>עד ${formatYearEnd(state.yearEnd)}</span>
             <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/></svg>
           </button>
         </div>
 
-        <div class="hero">
-          <div class="hero-label">${isComplete ? 'יעד הושג' : 'ימים שנותרו לצבור'}</div>
-          <div class="hero-number">${isComplete ? '✓' : remaining}</div>
-          <div class="progress">
-            <div class="progress-fill ${progressClass}" style="width: ${pct}%"></div>
-          </div>
+        <div class="tabs">
+          <button class="tab ${active === 'odelia' ? 'active' : ''}" onclick="switchTab('odelia')">אודליה</button>
+          <button class="tab ${active === 'meir' ? 'active' : ''}" onclick="switchTab('meir')">מאיר</button>
         </div>
 
-        <div class="stats">
-          <div class="stat">
-            <div class="stat-value">${totalDays}</div>
-            <div class="stat-label">ימים נצברו</div>
-          </div>
-          <div class="stat">
-            <div class="stat-value ${isBehind ? 'stat-warning' : ''}">${daysToEnd}</div>
-            <div class="stat-label">ימים עד סוף השנה</div>
-          </div>
-        </div>
-
-        ${isBehind ? `
-          <div class="warning-banner">
-            <span>⚠️</span>
-            <span>חסרים ${remaining} ימים ויש רק ${daysToEnd} ימים עד סוף השנה. צריך להוסיף ביקורים או להאריך את הקיימים.</span>
-          </div>
-        ` : ''}
-
-        ${isComplete ? `
-          <div class="warning-banner" style="background: rgba(74, 124, 89, 0.12); border-color: rgba(74, 124, 89, 0.25); color: var(--good);">
-            <span>✓</span>
-            <span>הגעת ליעד של ${TARGET_DAYS} ימים. כל ביקור נוסף הוא בונוס.</span>
-          </div>
-        ` : ''}
+        ${heroHtml}
+        ${statsHtml}
+        ${warningHtml}
 
         <div class="section-head">
-          <h2 class="section-title">הטיסות שלי</h2>
+          <h2 class="section-title">${active === 'odelia' ? 'הטיסות שלי' : 'הטיסות של מאיר'}</h2>
           <button class="add-btn" onclick="openAdd()">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
             <span>הוספת טיסה</span>
@@ -649,31 +1104,34 @@
         </div>
 
         <div class="flights">
-          ${flights.length === 0 ? `
-            <div class="empty">
-              <div class="empty-icon">✈️</div>
-              <div class="empty-main">עדיין לא הוספת טיסות</div>
-              <div class="empty-sub">לחצי על "הוספת טיסה" כדי להתחיל</div>
-            </div>
-          ` : flights.map(f => `
-            <div class="flight" onclick="openEdit('${f.id}')">
-              <div class="flight-line">
-                <span class="flight-dates">${formatDateRange(f.arrival, f.departure)}</span>
-                <span class="flight-sep">·</span>
-                <span class="flight-days">${f.days} ${f.days === 1 ? 'יום' : 'ימים'}</span>
-                <span class="flight-cumulative">סה״כ ${f.cumulative}</span>
-              </div>
-              ${f.label ? `<div class="flight-label">${escapeHtml(f.label)}</div>` : ''}
-            </div>
-          `).join('')}
+          ${flightsHtml}
         </div>
       `;
     }
 
+    function switchTab(tab) {
+      state.activeTab = tab;
+      saveActiveTab();
+      render();
+    }
+
+    // ──── Add/Edit Modal ────
     function openAdd() {
       state.mode = 'add';
       state.editingId = null;
-      renderFlightModal({ arrival: '', departure: '', label: '' });
+      state.draft = {
+        type: 'shared',
+        owner: 'odelia',
+        splitDates: false,
+        arrival: '',
+        departure: '',
+        odeliaArrival: '',
+        odeliaDeparture: '',
+        meirArrival: '',
+        meirDeparture: '',
+        label: ''
+      };
+      renderFlightModal();
     }
 
     function openEdit(id) {
@@ -681,10 +1139,28 @@
       if (!f) return;
       state.mode = 'edit';
       state.editingId = id;
-      renderFlightModal(f);
+      state.draft = {
+        type: f.type,
+        owner: (f.type === 'odelia' || f.type === 'meir') ? f.type : 'odelia',
+        splitDates: f.splitDates || false,
+        arrival: f.arrival || '',
+        departure: f.departure || '',
+        odeliaArrival: f.odeliaArrival || f.arrival || '',
+        odeliaDeparture: f.odeliaDeparture || f.departure || '',
+        meirArrival: f.meirArrival || f.arrival || '',
+        meirDeparture: f.meirDeparture || f.departure || '',
+        label: f.label || ''
+      };
+      renderFlightModal();
     }
 
-    function renderFlightModal(f) {
+    function renderFlightModal() {
+      const d = state.draft;
+      const isShared = d.type === 'shared';
+      const isSeparate = d.type === 'separate' || d.type === 'odelia' || d.type === 'meir';
+      // For UI, treat odelia/meir as 'separate' selection
+      const typeSelector = isShared ? 'shared' : 'separate';
+
       const content = document.getElementById('modal-content');
       content.innerHTML = `
         <div class="modal-header">
@@ -695,21 +1171,76 @@
         </div>
 
         <div class="field">
-          <label class="field-label">תאריך נחיתה באנגליה</label>
-          <input type="date" class="field-input" id="f-arrival" value="${f.arrival}" oninput="updatePreview()">
+          <label class="field-label">סוג הטיסה</label>
+          <div class="segmented">
+            <button type="button" class="seg-option ${typeSelector === 'shared' ? 'active' : ''}" onclick="setType('shared')">משותפת</button>
+            <button type="button" class="seg-option ${typeSelector === 'separate' ? 'active' : ''}" onclick="setType('separate')">נפרדת</button>
+          </div>
         </div>
 
-        <div class="field">
-          <label class="field-label">תאריך טיסה חזרה</label>
-          <input type="date" class="field-input" id="f-departure" value="${f.departure}" oninput="updatePreview()">
-        </div>
+        ${typeSelector === 'separate' ? `
+          <div class="field">
+            <label class="field-label">של מי?</label>
+            <div class="segmented">
+              <button type="button" class="seg-option ${d.owner === 'odelia' ? 'active' : ''}" onclick="setOwner('odelia')">אודליה</button>
+              <button type="button" class="seg-option ${d.owner === 'meir' ? 'active' : ''}" onclick="setOwner('meir')">מאיר</button>
+            </div>
+          </div>
+        ` : ''}
+
+        ${isShared && d.splitDates ? `
+          <div class="split-dates-group">
+            <h4>תאריכים של אודליה</h4>
+            <div class="date-pair">
+              <div class="field">
+                <label class="field-label">נחיתה</label>
+                <input type="date" class="field-input" value="${d.odeliaArrival}" oninput="updateDraft('odeliaArrival', this.value)">
+              </div>
+              <div class="field">
+                <label class="field-label">חזרה</label>
+                <input type="date" class="field-input" value="${d.odeliaDeparture}" oninput="updateDraft('odeliaDeparture', this.value)">
+              </div>
+            </div>
+          </div>
+          <div class="split-dates-group">
+            <h4>תאריכים של מאיר</h4>
+            <div class="date-pair">
+              <div class="field">
+                <label class="field-label">נחיתה</label>
+                <input type="date" class="field-input" value="${d.meirArrival}" oninput="updateDraft('meirArrival', this.value)">
+              </div>
+              <div class="field">
+                <label class="field-label">חזרה</label>
+                <input type="date" class="field-input" value="${d.meirDeparture}" oninput="updateDraft('meirDeparture', this.value)">
+              </div>
+            </div>
+          </div>
+        ` : `
+          <div class="date-pair">
+            <div class="field">
+              <label class="field-label">תאריך נחיתה</label>
+              <input type="date" class="field-input" value="${d.arrival}" oninput="updateDraft('arrival', this.value)">
+            </div>
+            <div class="field">
+              <label class="field-label">תאריך חזרה</label>
+              <input type="date" class="field-input" value="${d.departure}" oninput="updateDraft('departure', this.value)">
+            </div>
+          </div>
+        `}
+
+        ${isShared ? `
+          <div class="toggle-row" onclick="toggleSplitDates()">
+            <div class="toggle-label">תאריכים שונים לכל אחד</div>
+            <div class="toggle-switch ${d.splitDates ? 'on' : ''}"></div>
+          </div>
+        ` : ''}
 
         <div class="field">
           <label class="field-label">תווית (לא חובה)</label>
-          <input type="text" class="field-input" id="f-label" value="${escapeHtml(f.label || '')}" placeholder="לדוגמה: ביקור הורים, חופשה...">
+          <input type="text" class="field-input" value="${escapeHtml(d.label)}" placeholder="לדוגמה: ביקור הורים, חופשה..." oninput="updateDraft('label', this.value)">
         </div>
 
-        <div class="days-preview" id="days-preview">בחרי תאריכים</div>
+        <div id="days-preview-host">${renderDaysPreview()}</div>
 
         <div class="modal-actions">
           <button class="btn btn-secondary" onclick="closeModal()">ביטול</button>
@@ -723,66 +1254,186 @@
         ` : ''}
 
         <div class="helper-text">
-          הספירה כוללת את יום הנחיתה ואת יום הטיסה חזרה (סטנדרט ויזה).
+          הספירה כוללת את יום הנחיתה ואת יום החזרה (סטנדרט ויזה).
         </div>
       `;
       document.getElementById('modal').classList.add('active');
-      setTimeout(updatePreview, 0);
     }
 
-    function updatePreview() {
-      const a = document.getElementById('f-arrival').value;
-      const d = document.getElementById('f-departure').value;
-      const preview = document.getElementById('days-preview');
-      if (a && d) {
-        const days = daysBetween(a, d);
-        if (days > 0) {
-          preview.className = 'days-preview';
-          preview.innerHTML = `<span class="num">${days}</span> ${days === 1 ? 'יום' : 'ימים'}`;
-        } else {
-          preview.className = 'days-preview error';
-          preview.textContent = 'תאריך החזרה חייב להיות אחרי הנחיתה';
+    function renderDaysPreview() {
+      const d = state.draft;
+      const isShared = d.type === 'shared';
+
+      if (isShared && d.splitDates) {
+        const oDays = daysBetween(d.odeliaArrival, d.odeliaDeparture);
+        const mDays = daysBetween(d.meirArrival, d.meirDeparture);
+        const oValid = d.odeliaArrival && d.odeliaDeparture && oDays > 0;
+        const mValid = d.meirArrival && d.meirDeparture && mDays > 0;
+
+        if (!oValid && !mValid) {
+          return `<div class="days-preview">בחרי תאריכים לשניכם</div>`;
         }
+        return `
+          <div class="days-preview split">
+            <div class="side">
+              <div class="side-label">אודליה</div>
+              <span class="num">${oValid ? oDays : '–'}</span>${oValid ? ' ' + (oDays === 1 ? 'יום' : 'ימים') : ''}
+            </div>
+            <div class="side">
+              <div class="side-label">מאיר</div>
+              <span class="num">${mValid ? mDays : '–'}</span>${mValid ? ' ' + (mDays === 1 ? 'יום' : 'ימים') : ''}
+            </div>
+          </div>
+        `;
       } else {
-        preview.className = 'days-preview';
-        preview.textContent = 'בחרי תאריכים';
+        if (!d.arrival || !d.departure) {
+          return `<div class="days-preview">בחרי תאריכים</div>`;
+        }
+        const days = daysBetween(d.arrival, d.departure);
+        if (days <= 0) {
+          return `<div class="days-preview error">תאריך החזרה חייב להיות אחרי הנחיתה</div>`;
+        }
+        return `<div class="days-preview"><span class="num">${days}</span>${days === 1 ? 'יום' : 'ימים'}</div>`;
       }
     }
 
-    async function saveFlight() {
-      const arrival = document.getElementById('f-arrival').value;
-      const departure = document.getElementById('f-departure').value;
-      const label = document.getElementById('f-label').value.trim();
+    function updateDaysPreview() {
+      const host = document.getElementById('days-preview-host');
+      if (host) host.innerHTML = renderDaysPreview();
+    }
 
-      if (!arrival || !departure) { alert('יש לבחור שני תאריכים'); return; }
-      if (daysBetween(arrival, departure) <= 0) {
-        alert('תאריך החזרה חייב להיות אחרי הנחיתה');
-        return;
+    function updateDraft(field, value) {
+      state.draft[field] = value;
+      updateDaysPreview();
+    }
+
+    function setType(newType) {
+      const d = state.draft;
+      if (newType === 'shared') {
+        d.type = 'shared';
+        // Carry over dates if any
+        if (!d.arrival && (d.odeliaArrival || d.meirArrival)) {
+          d.arrival = d.odeliaArrival || d.meirArrival;
+          d.departure = d.odeliaDeparture || d.meirDeparture;
+        }
+      } else {
+        d.type = d.owner || 'odelia';
+        // Carry over from split dates if was split
+        if (!d.arrival && d.splitDates) {
+          if (d.owner === 'odelia') {
+            d.arrival = d.odeliaArrival;
+            d.departure = d.odeliaDeparture;
+          } else {
+            d.arrival = d.meirArrival;
+            d.departure = d.meirDeparture;
+          }
+        }
+        d.splitDates = false;
+      }
+      renderFlightModal();
+    }
+
+    function setOwner(owner) {
+      state.draft.owner = owner;
+      state.draft.type = owner;
+      renderFlightModal();
+    }
+
+    function toggleSplitDates() {
+      const d = state.draft;
+      d.splitDates = !d.splitDates;
+      // When turning on, copy the existing dates to both sides
+      if (d.splitDates && d.arrival && d.departure) {
+        if (!d.odeliaArrival) d.odeliaArrival = d.arrival;
+        if (!d.odeliaDeparture) d.odeliaDeparture = d.departure;
+        if (!d.meirArrival) d.meirArrival = d.arrival;
+        if (!d.meirDeparture) d.meirDeparture = d.departure;
+      }
+      // When turning off, prefer odelia's dates as the unified dates
+      if (!d.splitDates && d.odeliaArrival && d.odeliaDeparture) {
+        if (!d.arrival) d.arrival = d.odeliaArrival;
+        if (!d.departure) d.departure = d.odeliaDeparture;
+      }
+      renderFlightModal();
+    }
+
+    function validateDraft() {
+      const d = state.draft;
+      if (d.type === 'shared') {
+        if (d.splitDates) {
+          if (!d.odeliaArrival || !d.odeliaDeparture || !d.meirArrival || !d.meirDeparture) {
+            return 'יש למלא את כל התאריכים לשני הצדדים';
+          }
+          if (daysBetween(d.odeliaArrival, d.odeliaDeparture) <= 0) {
+            return 'תאריך החזרה של אודליה חייב להיות אחרי הנחיתה';
+          }
+          if (daysBetween(d.meirArrival, d.meirDeparture) <= 0) {
+            return 'תאריך החזרה של מאיר חייב להיות אחרי הנחיתה';
+          }
+        } else {
+          if (!d.arrival || !d.departure) return 'יש לבחור שני תאריכים';
+          if (daysBetween(d.arrival, d.departure) <= 0) return 'תאריך החזרה חייב להיות אחרי הנחיתה';
+        }
+      } else {
+        if (!d.arrival || !d.departure) return 'יש לבחור שני תאריכים';
+        if (daysBetween(d.arrival, d.departure) <= 0) return 'תאריך החזרה חייב להיות אחרי הנחיתה';
+      }
+      return null;
+    }
+
+    function saveFlight() {
+      const d = state.draft;
+      const err = validateDraft();
+      if (err) { alert(err); return; }
+
+      const flightData = {
+        type: d.type,
+        label: d.label.trim()
+      };
+
+      if (d.type === 'shared') {
+        if (d.splitDates) {
+          flightData.splitDates = true;
+          flightData.odeliaArrival = d.odeliaArrival;
+          flightData.odeliaDeparture = d.odeliaDeparture;
+          flightData.meirArrival = d.meirArrival;
+          flightData.meirDeparture = d.meirDeparture;
+          // Also keep a "primary" arrival/departure for sorting fallback (use odelia's)
+          flightData.arrival = d.odeliaArrival;
+          flightData.departure = d.odeliaDeparture;
+        } else {
+          flightData.splitDates = false;
+          flightData.arrival = d.arrival;
+          flightData.departure = d.departure;
+        }
+      } else {
+        flightData.splitDates = false;
+        flightData.arrival = d.arrival;
+        flightData.departure = d.departure;
       }
 
       if (state.mode === 'add') {
-        state.flights.push({
-          id: Date.now().toString(36) + Math.random().toString(36).slice(2, 8),
-          arrival, departure, label
-        });
+        flightData.id = Date.now().toString(36) + Math.random().toString(36).slice(2, 8);
+        state.flights.push(flightData);
       } else {
-        const f = state.flights.find(x => x.id === state.editingId);
-        if (f) { f.arrival = arrival; f.departure = departure; f.label = label; }
+        const idx = state.flights.findIndex(x => x.id === state.editingId);
+        if (idx >= 0) state.flights[idx] = { ...state.flights[idx], ...flightData };
       }
 
-      await saveFlights();
+      saveFlights();
       closeModal();
       render();
     }
 
-    async function deleteFlight() {
+    function deleteFlight() {
       if (!confirm('למחוק את הטיסה הזו?')) return;
       state.flights = state.flights.filter(x => x.id !== state.editingId);
-      await saveFlights();
+      saveFlights();
       closeModal();
       render();
     }
 
+    // ──── Settings Modal ────
     function openSettings() {
       state.mode = 'settings';
       const content = document.getElementById('modal-content');
@@ -800,7 +1451,7 @@
         </div>
 
         <div class="helper-text" style="margin-bottom: 18px;">
-          כשתחל שנת ויזה חדשה, עדכני את התאריך ואיפסי את הטיסות.
+          תאריך משותף לשניכם (אותה ויזה). כשתחל שנת ויזה חדשה, עדכני את התאריך ואיפסי את הטיסות.
         </div>
 
         <div class="modal-actions">
@@ -815,31 +1466,33 @@
       document.getElementById('modal').classList.add('active');
     }
 
-    async function saveSettings() {
+    function saveSettings() {
       const ye = document.getElementById('s-yearend').value;
-      if (ye) { state.yearEnd = ye; await saveYearEnd(); }
+      if (ye) { state.yearEnd = ye; saveYearEnd(); }
       closeModal();
       render();
     }
 
-    async function resetAll() {
-      if (!confirm('למחוק את כל הטיסות? פעולה זו לא ניתנת לביטול.')) return;
+    function resetAll() {
+      if (!confirm('למחוק את כל הטיסות (גם של אודליה וגם של מאיר)? פעולה זו לא ניתנת לביטול.')) return;
       state.flights = [];
-      await saveFlights();
+      saveFlights();
       closeModal();
       render();
     }
 
     function closeModal() {
       document.getElementById('modal').classList.remove('active');
+      state.draft = null;
     }
 
     function closeOnBackdrop(e) {
       if (e.target.id === 'modal') closeModal();
     }
 
-    (async function init() {
-      await load();
+    // ──── Init ────
+    (function init() {
+      load();
       render();
     })();
   </script>
